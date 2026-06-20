@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module Help 2026 — справочник команд</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            background: #0d1117;
+            color: #e6edf3;
+            padding: 30px 20px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Заголовок */
+        .header {
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 32px;
+            font-weight: 600;
+            color: #f0f6fc;
+        }
+
+        .header p {
+            color: #8b949e;
+            font-size: 16px;
+            margin-top: 8px;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .tag {
+            background: #21262d;
+            color: #58a6ff;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #30363d;
+        }
+
+        /* Поиск */
+        .search-box {
+            width: 100%;
+            padding: 12px 18px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            background: #0d1117;
+            color: #e6edf3;
+            margin-bottom: 30px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-box:focus {
+            border-color: #58a6ff;
+        }
+
+        .search-box::placeholder {
+            color: #484f58;
+        }
+
+        /* Блок с заданием */
+        .task {
+            margin-bottom: 35px;
+        }
+
+        .task h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #f0f6fc;
+            margin-bottom: 10px;
+            padding-left: 4px;
+        }
+
+        .task .description {
+            color: #8b949e;
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-left: 4px;
+        }
+
+        /* Блок с кодом */
+        .code-block {
+            position: relative;
+            background: #161b22;
+            border-radius: 8px;
+            border: 1px solid #30363d;
+            overflow: hidden;
+        }
+
+        .code-block pre {
+            padding: 18px 20px;
+            margin: 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #e6edf3;
+        }
+
+        .code-block code {
+            font-family: inherit;
+            color: #e6edf3;
+        }
+
+        /* Подсветка синтаксиса (простая) */
+        .code-block .cmd { color: #ff7b72; }
+        .code-block .opt { color: #d2a8ff; }
+        .code-block .str { color: #a5d6ff; }
+        .code-block .var { color: #ffa657; }
+        .code-block .cmt { color: #8b949e; }
+
+        /* Кнопка копирования */
+        .copy-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #21262d;
+            color: #8b949e;
+            border: 1px solid #30363d;
+            padding: 5px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .copy-btn:hover {
+            background: #30363d;
+            color: #f0f6fc;
+            border-color: #58a6ff;
+        }
+
+        .copy-btn.copied {
+            background: #238636;
+            color: white;
+            border-color: #238636;
+        }
+
+        /* Кнопка "Копировать все" */
+        .copy-all {
+            background: #21262d;
+            color: #f0f6fc;
+            border: 1px solid #30363d;
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .copy-all:hover {
+            background: #30363d;
+            border-color: #58a6ff;
+        }
+
+        .copy-all.copied {
+            background: #238636;
+            border-color: #238636;
+        }
+
+        /* Статистика */
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 14px;
+        }
+
+        .stats span {
+            color: #f0f6fc;
+            font-weight: 600;
+        }
+
+        /* Адаптация под телефон */
+        @media (max-width: 600px) {
+            .header h1 { font-size: 24px; }
+            .code-block pre { font-size: 12px; padding: 14px 16px; }
+            .copy-btn { font-size: 10px; padding: 3px 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ШАПКА -->
+    <div class="header">
+        <h1>📘 Module Help 2026</h1>
+        <p>Открытая учебная страница с командами по модулям. Подходит для подготовки, повторения и выполнения лабораторных работ в разрешённой учебной среде.</p>
+        <div class="tags">
+            <span class="tag">📂 Разделов: 37</span>
+            <span class="tag">✅ Модуль 1 добавлен</span>
+            <span class="tag">📋 Поиск и копирование</span>
+        </div>
+    </div>
+
+    <!-- ПОИСК -->
+    <input type="text" class="search-box" id="searchInput" placeholder="🔍 Поиск по командам, сервисам и заданиям..." onkeyup="searchCommands()">
+
+    <!-- ЗАДАНИЕ 1 -->
+    <div class="task" data-search="hostnamectl hostname имя хостов настройка">
+        <h2>📌 Задание 1 — Настройка имен хостов</h2>
+        <div class="description">Установка hostname для всех узлов лабораторного стенда</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyBlock(this)">📋 Копировать</button>
+            <pre><code>hostnamectl set-hostname isp.au-team.irpo; exec bash
+hostnamectl set-hostname hq-rtr.au-team.irpo; exec bash
+hostnamectl set-hostname hq-srv.au-team.irpo; exec bash
+hostnamectl set-hostname hq-cli.au-team.irpo; exec bash
+hostnamectl set-hostname br-rtr.au-team.irpo; exec bash
+hostnamectl set-hostname br-srv.au-team.irpo; exec bash</code></pre>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 2 -->
+    <div class="task" data-search="ip адрес сеть интерфейс enp7s настройка">
+        <h2>📌 Задание 2 — Настройка IP адресов</h2>
+        <div class="description">Назначение IP-адресов на интерфейсах ISP</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyBlock(this)">📋 Копировать</button>
+            <pre><code>mkdir -p /etc/net/ifaces/enp7s{2,3}
+
+echo 'TYPE=eth' | tee /etc/net/ifaces/enp7s{2,3}/options
+
+echo '172.16.1.1/28' > /etc/net/ifaces/enp7s2/ipv4address
+echo '172.16.2.1/28' > /etc/net/ifaces/enp7s3/ipv4address
+
+systemctl restart network</code></pre>
+        </div>
+    </div>
+
+    <!-- ЗАДАНИЕ 3 (пример, добавьте свои) -->
+    <div class="task" data-search="systemctl служба сервис перезапуск">
+        <h2>📌 Задание 3 — Управление службами</h2>
+        <div class="description">Основные команды для работы с systemd</div>
+        <div class="code-block">
+            <button class="copy-btn" onclick="copyBlock(this)">📋 Копировать</button>
+            <pre><code>systemctl status network
+systemctl restart network
+systemctl enable network
+systemctl disable network</code></pre>
+        </div>
+    </div>
+
+    <!-- КНОПКА "КОПИРОВАТЬ ВСЕ" -->
+    <button class="copy-all" id="copyAllBtn" onclick="copyAll()">📋 Копировать все команды</button>
+
+    <!-- СТАТИСТИКА -->
+    <div class="stats">
+        <div>📄 Всего команд: <span id="totalCommands">0</span></div>
+        <div>📚 Всего заданий: <span id="totalTasks">0</span></div>
+    </div>
+
+    <script>
+        // ====== ПОДСЧЁТ СТАТИСТИКИ ======
+        const tasks = document.querySelectorAll('.task');
+        document.getElementById('totalTasks').textContent = tasks.length;
+
+        let totalCmds = 0;
+        tasks.forEach(task => {
+            const code = task.querySelector('code');
+            if (code) {
+                const lines = code.innerText.split('\n').filter(line => line.trim() !== '');
+                totalCmds += lines.length;
+            }
+        });
+        document.getElementById('totalCommands').textContent = totalCmds;
+
+        // ====== КОПИРОВАТЬ ОДИН БЛОК ======
+        function copyBlock(btn) {
+            const block = btn.closest('.code-block');
+            const code = block.querySelector('code');
+            const text = code.innerText;
+
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = '✅ Скопировано!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Копировать';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                // fallback для старых браузеров
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                btn.textContent = '✅ Скопировано!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Копировать';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        // ====== КОПИРОВАТЬ ВСЕ ======
+        function copyAll() {
+            const allCodes = document.querySelectorAll('.code-block code');
+            let fullText = '';
+            allCodes.forEach(code => {
+                fullText += code.innerText + '\n\n';
+            });
+
+            navigator.clipboard.writeText(fullText.trim()).then(() => {
+                const btn = document.getElementById('copyAllBtn');
+                btn.textContent = '✅ Все скопировано!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Копировать все команды';
+                    btn.classList.remove('copied');
+                }, 2500);
+            }).catch(() => {
+                const textarea = document.createElement('textarea');
+                textarea.value = fullText.trim();
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const btn = document.getElementById('copyAllBtn');
+                btn.textContent = '✅ Все скопировано!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = '📋 Копировать все команды';
+                    btn.classList.remove('copied');
+                }, 2500);
+            });
+        }
+
+        // ====== ПОИСК ======
+        function searchCommands() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const tasks = document.querySelectorAll('.task');
+
+            tasks.forEach(task => {
+                const text = task.innerText.toLowerCase();
+                const searchAttr = task.getAttribute('data-search') || '';
+                const match = text.includes(query) || searchAttr.includes(query);
+                task.style.display = match ? 'block' : 'none';
+            });
+        }
+
+        // ====== ГОРЯЧАЯ КЛАВИША Ctrl+F ======
+        // Перенаправляем стандартный поиск браузера на наш поиск
+        document.addEventListener('keydown', function(e) {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                e.preventDefault();
+                document.getElementById('searchInput').focus();
+                document.getElementById('searchInput').select();
+            }
+        });
+
+        // ====== АВТОФОКУС НА ПОИСК (по нажатию /) ======
+        document.addEventListener('keydown', function(e) {
+            if (e.key === '/' && !e.ctrlKey && !e.metaKey && !e.altKey) {
+                const active = document.activeElement;
+                if (active && active.tagName !== 'INPUT') {
+                    e.preventDefault();
+                    document.getElementById('searchInput').focus();
+                    document.getElementById('searchInput').select();
+                }
+            }
+        });
+
+        console.log('📘 Module Help 2026 загружен!');
+        console.log(`📚 Заданий: ${document.getElementById('totalTasks').textContent}`);
+        console.log(`📄 Команд: ${document.getElementById('totalCommands').textContent}`);
+    </script>
+
+</body>
+</html>
